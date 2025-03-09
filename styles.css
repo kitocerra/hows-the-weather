@@ -1,0 +1,29 @@
+/* title of the website */
+
+#title {
+text-align: center;
+font-size: 30px;
+color: red;
+font-family: sans-serif;
+animation: infColors 5s linear infinite;
+}
+
+/* rainbow animation for title of website */
+
+@keyframes infColors {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* splash page */
+
+body {
+  background-image: url('personalization/9.gif');
+  object-fit: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
