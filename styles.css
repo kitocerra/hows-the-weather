@@ -17,11 +17,6 @@
   --align-header-x: center;
 }
 
-/* makes sure that there's no overflowing, zooming, etc. also makes sure there's no sidebars unless zoomed in (might change later for only mobile) */
-
-html {
-  height: 100%;
-}
 
 /* makes sure that all added padding or margin by the browser is removed 
 allows for more control of sizing elements */
