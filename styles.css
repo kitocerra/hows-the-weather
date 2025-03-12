@@ -1,16 +1,74 @@
-/* static size so that all the text within the document can automatically size up or down relative to the html font-size */
-html {
-  font-size: 16px;
+/* BETTER THAN @MEDIA FOR MORE RESPONSIVE LAYOUTS. BOTH USEFUL TOGETHER WHEN USED CORRECTLY */
+/* CSS VARIABLES THAT CAN BE REUSED ANYWHERE ON CSS DOC; EXTREMELY GOOD FORM */
+/* ":root" is short hand for a universal selector; any variable within it can be used anywhere in doc */
+:root {
+  /* DEFINING VARIABLES AND THEIR VALUES */
+  /* 24px, 5.5% of viewport width + 1 rem = 71px (SCALES UP OR DOWN), 48px */ 
+  /* viewport is based on the pixel size of the current screen
+     it's a percentage based off of the px size of the current screen
+     that automatically scales, in this case the header text, according to screen size
+     since it's in clamp, it's a preferred value that essentially sizes up or sizes down
+     according to if it's above or below the minimum/maximum rem/px value
+     adding 1 rem to vw makes the static size a little bigger, regardless of scaling  */
+  --heading-size: clamp(1.5rem, 5.5vw + 1rem, 5rem);
+  /* universal variable to use as a value, in this case, centering for align-items and justify content 
+  not sure if this is better than just manually applying it, but we'll see */
+  --align-header-y: center;
+  --align-header-x: center;
 }
 
-/* title of the website */
+/* makes sure that there's no overflowing, zooming, etc. also makes sure there's no sidebars unless zoomed in (might change later for only mobile) */
 
-#title {
+html {
+  height: 100%;
+}
+
+/* makes sure that all added padding or margin by the browser is removed 
+allows for more control of sizing elements */
+
+* /*targets all elements in the HTML doc */ {
+  margin: 0;
+  padding: 0;
+}
+
+/* splash page */
+/* makes sure that there's no overflowing, zooming, etc. also makes sure there's no sidebars unless zoomed in (might change later for only mobile) */
+body {
+  background-image: url('personalization/9.gif');
+  /* makes sure the background doesn't constantly repeat itself, while also taking up the entirety of the page */
+  object-fit: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* header of the website */
+
+#header {
 text-align: center;
-font-size: 10rem;
+/* the header's text size is fully responsive thanks to "--heading-size" */
+font-size: var(--heading-size);
 color: red; /* color is red because the animation (@keyframes infColors) can only cycle through every color when it starts at red; requires the default color to be red */
 font-family: sans-serif;
 animation: infColors 5s linear infinite;
+}
+
+/* MOBILE LAYOUT */
+/* anything under max-width of the page itself will have these conditions */
+@media (max-width: 768px) {
+  .header-container {
+    align-items: var(--align-header-y);
+    justify-content: var(--align-header-x);
+  }
+}
+/* allows me to move the element that contains multiple elements while also manipulating the elements within said element */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 /* rainbow animation for title of website */
@@ -22,45 +80,4 @@ animation: infColors 5s linear infinite;
   to { /* end of an animation or 100% */
     filter: hue-rotate(360deg);  /* goes through every single degree of the color wheel */
   }
-}
-
-/* MOBILE LAYOUT */
-/* anything under 425px in width of the page itself will have these conditions */
-@media (max-width: 425px) {
-  .header-container {
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  } 
-  #title {
-    font-size: 40px;
-  }
-}
-
-/* allows me to move the element that contains multiple elements while also manipulating the elements within said element */
-.header-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-/* splash page */
-
- body {
-  background-image: url('personalization/9.gif');
-  /* makes sure the background doesn't constantly repeat itself, while also taking up the entirety of the page */
-  object-fit: contain;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/* makes sure that there's no overflowing, zooming, etc. also makes sure there's no sidebars unless zoomed in (might change later for only mobile) */
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
 }
