@@ -15,6 +15,7 @@
   not sure if this is better than just manually applying it, but we'll see */
   --align-header-y: center;
   --align-header-x: center;
+  --max-height: 100vh;
 }
 
 
@@ -24,19 +25,6 @@ allows for more control of sizing elements */
 * /*targets all elements in the HTML doc */ {
   margin: 0;
   padding: 0;
-}
-
-/* splash page */
-/* makes sure that there's no overflowing, zooming, etc. also makes sure there's no sidebars unless zoomed in (might change later for only mobile) */
-body {
-  background-image: url('personalization/9.gif');
-  /* makes sure the background doesn't constantly repeat itself, while also taking up the entirety of the page */
-  object-fit: contain;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 100vh;
-  overflow: hidden;
 }
 
 /* header of the website */
@@ -50,6 +38,15 @@ font-family: sans-serif;
 animation: infColors 5s linear infinite;
 }
 
+/* DIV AS THE BACKGROUND IMAGE OF THE WEBSITE. GREATEST DECISION, WAY BETTER THAN
+USING THE ENTIRE BODY AS THE IMAGE/GIF */
+
+#background-gif {
+  background-image: url(personalization/9.gif);
+  height: var(--max-height);
+  overflow: hidden;
+}
+
 /* MOBILE LAYOUT */
 /* anything under max-width of the page itself will have these conditions */
 @media (max-width: 768px) {
@@ -59,11 +56,13 @@ animation: infColors 5s linear infinite;
   }
 }
 /* allows me to move the element that contains multiple elements while also manipulating the elements within said element */
+/* it's not possible to center a div, or move anything in the div for that matter
+without setting a specific height/width; i'm trying to center the div and its elements
+to the middle of the page, but it's impossible without setting a specific height */
 .header-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  height: var(--max-height);
 }
 
 /* rainbow animation for title of website */
